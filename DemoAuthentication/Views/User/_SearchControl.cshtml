@@ -1,0 +1,17 @@
+﻿@model DemoAuthentication.Models.UserModel
+
+
+<h2>SearchControl</h2>
+
+
+@using (Ajax.BeginForm("Search", "User", null, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "divGrid", OnBegin = "beginPaging", OnSuccess = "successPaging" }, new { name = "formSearch" }))
+{
+
+   <fieldset>
+        <legend>Search by</legend>   
+        User Name: @Html.TextBox("valSearch")
+        @Html.Hidden("UserName", ViewData["id"])
+        <input type="submit" value="Search" />
+    </fieldset>
+    } 
+

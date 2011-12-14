@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Test1Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="Test1Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Q1" EntityType="Test1Model.Q1" />
+    <EntitySet Name="Q2" EntityType="Test1Model.Q2" />
+    <EntitySet Name="sysdiagrams" EntityType="Test1Model.sysdiagram" />
+    <AssociationSet Name="FK_Q1_Q2" Association="Test1Model.FK_Q1_Q2">
+      <End Role="Q2" EntitySet="Q2" />
+      <End Role="Q1" EntitySet="Q1" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Q1">
+    <Key>
+      <PropertyRef Name="Username" />
+    </Key>
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Password" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="RoleId" Type="Int32" />
+    <NavigationProperty Name="Q2" Relationship="Test1Model.FK_Q1_Q2" FromRole="Q1" ToRole="Q2" />
+  </EntityType>
+  <EntityType Name="Q2">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <Property Name="RoleName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Description" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Q1" Relationship="Test1Model.FK_Q1_Q2" FromRole="Q2" ToRole="Q1" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Q1_Q2">
+    <End Role="Q2" Type="Test1Model.Q2" Multiplicity="0..1" />
+    <End Role="Q1" Type="Test1Model.Q1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Q2">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="Q1">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

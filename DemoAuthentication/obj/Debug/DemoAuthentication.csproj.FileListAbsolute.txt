@@ -1,0 +1,8 @@
+c:\users\user\documents\visual studio 2010\Projects\DemoAuthentication\DemoAuthentication\bin\DemoAuthentication.dll
+c:\users\user\documents\visual studio 2010\Projects\DemoAuthentication\DemoAuthentication\bin\DemoAuthentication.pdb
+c:\users\user\documents\visual studio 2010\Projects\DemoAuthentication\DemoAuthentication\bin\EntityFramework.dll
+c:\users\user\documents\visual studio 2010\Projects\DemoAuthentication\DemoAuthentication\bin\EntityFramework.xml
+c:\users\user\documents\visual studio 2010\Projects\DemoAuthentication\DemoAuthentication\obj\Debug\ResolveAssemblyReference.cache
+c:\users\user\documents\visual studio 2010\Projects\DemoAuthentication\DemoAuthentication\obj\Debug\DemoAuthentication.dll
+c:\users\user\documents\visual studio 2010\Projects\DemoAuthentication\DemoAuthentication\obj\Debug\DemoAuthentication.pdb
+C:\Users\user\Documents\Visual Studio 2010\Projects\DemoAuthentication\DemoAuthentication\bin\MvcPaging.dll

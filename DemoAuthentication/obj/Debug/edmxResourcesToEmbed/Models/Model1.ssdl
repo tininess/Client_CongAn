@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Test1Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="Test1ModelStoreContainer">
+    <EntitySet Name="Q1" EntityType="Test1Model.Store.Q1" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Q2" EntityType="Test1Model.Store.Q2" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="sysdiagrams" EntityType="Test1Model.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Q1_Q2" Association="Test1Model.Store.FK_Q1_Q2">
+      <End Role="Q2" EntitySet="Q2" />
+      <End Role="Q1" EntitySet="Q1" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Q1">
+    <Key>
+      <PropertyRef Name="Username" />
+    </Key>
+    <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+    <Property Name="RoleId" Type="int" />
+  </EntityType>
+  <EntityType Name="Q2">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_Q1_Q2">
+    <End Role="Q2" Type="Test1Model.Store.Q2" Multiplicity="0..1" />
+    <End Role="Q1" Type="Test1Model.Store.Q1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Q2">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="Q1">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,35 @@
+﻿
+@model MvcPaging.IPagedList<DemoAuthentication.Models.TamTruModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@{DemoAuthentication.Models.TamTruModel a = new DemoAuthentication.Models.TamTruModel();}
+ <div id="divSearch">
+        @{Html.RenderPartial("_SearchControl", a);}
+    </div>
+    <div id="divGrid">
+            @{Html.RenderPartial("_ListControl", this.Model);}
+    </div>
+
+    <script type="text/javascript">
+
+        function beginPaging(args) {
+            // Animate
+            $('#divGrid').fadeOut('slow');
+        }
+
+        function successPaging() {
+            // Animate
+            $('#divGrid').fadeIn('slow');
+
+        }
+
+        function failurePaging() {
+            alert("Could not retrieve contacts.");
+        }
+
+    </script>
+

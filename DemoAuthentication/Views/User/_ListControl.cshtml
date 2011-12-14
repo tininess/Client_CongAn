@@ -1,0 +1,77 @@
+﻿@model MvcPaging.PagedList<DemoAuthentication.Models.UserModel>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="divgrid" id="list">
+    <tr>
+    <th>
+    UserName
+    </th>
+        <th>
+            CompanyName
+        </th>
+        <th>
+            BusinessCode
+        </th>
+        <th>
+            Phone
+        </th>
+        <th>
+            Mobile
+        </th>
+        <th>
+            PersonCode
+        </th>
+        <th>
+            Address
+        </th>
+       
+        <th>
+            UserFullName
+        </th>
+        <th>
+            Age
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+    <td>
+    @Html.DisplayFor(model=>item.UserName)
+    </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Companyname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BusinessCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mobile)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CMND)
+        </td>
+        <td>
+             @Html.DisplayFor(model=>item.Address) @Html.DisplayFor(modelItem => item.Phuong)/@Html.DisplayFor(modelItem => item.Quan)/@Html.DisplayFor(modelItem => item.Tinh)
+        </td>
+      
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Age)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.UserName  }) |
+        </td>
+    </tr>
+}
+
+</table>
+<div class="pager">
+  @Ajax.Pager(ViewData.Model.PageSize, ViewData.Model.PageNumber, ViewData.Model.TotalItemCount, new { controller = "User", action = "Search", keySearch = ViewData["keySearch"], valSearch = ViewData["valSearch"]}, new AjaxOptions { UpdateTargetId = "divGrid", OnBegin = "beginPaging", OnSuccess = "successPaging" })
+ </div>

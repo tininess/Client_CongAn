@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "UserPanel";
+}
+
+<h2>User Control Panel</h2>
+<div>
+    @Html.ActionLink("Đăng Ký Tạm Trú Online", "CreateByUser", "TamTru")
+</div>
+<div>
+    @Html.ActionLink("Lịch Sử Đăng Ký", "History", "TamTru", new { username = ViewData["user"] }, null)
+</div>
+

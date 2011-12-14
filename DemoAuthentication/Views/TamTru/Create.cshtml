@@ -1,0 +1,195 @@
+﻿@model DemoAuthentication.Models.TamTruModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Đăng Kí Tạm Trú</legend>
+
+              
+         <div class="editor-label">
+            @Html.LabelFor(model => model.SelectedProvinceValue)
+        </div>
+        <div class="editor-field">
+          @Html.DropDownListFor(model => model.SelectedProvinceValue, ViewData["Tinh"] as SelectList,"Chọn Tỉnh - Thành Phố", new { style = "width:160px", id="provinceList" })
+           @Html.ValidationMessageFor(model => model.SelectedProvinceValue)
+        </div>
+    
+       <div class="editor-label">
+            @Html.LabelFor(model => model.SelectedDistrictValue)
+        </div>
+        <div id="districtDiv">
+          
+            @Html.DropDownListFor(model => model.SelectedDistrictValue, ViewData["Quan"] as SelectList, "Chọn Quận - Huyện", new { style = "width:160px", id = "districtList" })
+            @Html.ValidationMessageFor(model => model.SelectedDistrictValue)
+
+           
+        </div>
+    
+    
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SelectedDetailProvincesValue)
+        </div>
+        <div class="editor-field">
+                 @Html.DropDownListFor(model => model.SelectedDetailProvincesValue, ViewData["Phuong"] as SelectList, "Chọn Phường - Xã", new { style = "width:160px", id = "detailList" })
+            @Html.ValidationMessageFor(model => model.SelectedDetailProvincesValue)
+        </div>
+        
+          <div class="editor-label">
+            @Html.LabelFor(model => model.SelectedLiDoValue)
+        </div>
+        <div class="editor-field">
+            @Html.ValidationMessageFor(model => model.SelectedLiDoValue)
+            @Html.DropDownListFor(m => m.SelectedLiDoValue, ViewData["LiDo"] as SelectList)
+       
+        </div>
+       
+          <div class="editor-label">
+            @Html.LabelFor(model => model.SelectedGiayToValue)
+        </div>
+        <div class="editor-field">
+            @Html.ValidationMessageFor(model => model.SelectedGiayToValue)
+            @Html.DropDownListFor(m => m.SelectedGiayToValue, ViewData["GiayTo"] as SelectList)
+       
+        </div>
+        
+  
+          <div class="editor-label">
+            @Html.LabelFor(model => model.SelectedQuocTichValue)
+        </div>
+        <div class="editor-field">
+            @Html.ValidationMessageFor(model => model.SelectedQuocTichValue)
+            @Html.DropDownListFor(m => m.SelectedQuocTichValue, ViewData["QuocTich"] as SelectList)
+       
+        </div>
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TT_FullName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TT_FullName)
+            @Html.ValidationMessageFor(model => model.TT_FullName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TT_DiaChiThuongTru)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TT_DiaChiThuongTru)
+            @Html.ValidationMessageFor(model => model.TT_DiaChiThuongTru)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TT_NgayDen)
+        </div>
+
+       <div class="editor-field">
+   
+    @Html.TextBoxFor(model => model.TT_NgayDen, new { id = "startDate", style = "width:80px" })
+     @Html.ValidationMessageFor(model => model.TT_NgayDen)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TT_NgayDi)
+        </div>
+        <div class="editor-field">
+              @Html.TextBoxFor(model => model.TT_NgayDi, new { id = "endDate", style = "width:80px" })
+            @Html.ValidationMessageFor(model => model.TT_NgayDi)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TT_DiaChiTamTru)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TT_DiaChiTamTru)
+            @Html.ValidationMessageFor(model => model.TT_DiaChiTamTru)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TT_Room)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TT_Room)
+            @Html.ValidationMessageFor(model => model.TT_Room)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TT_GiayTo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TT_GiayTo)
+            @Html.ValidationMessageFor(model => model.TT_GiayTo)
+        </div>
+
+        
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TT_LiDoKhac)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TT_LiDoKhac)
+            @Html.ValidationMessageFor(model => model.TT_LiDoKhac)
+        </div>
+
+        
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+        $("#provinceList").change(function () {
+            $.get('/Account/getDistrict/' + $(this).val(), function (response) {
+
+                var district = $.evalJSON(response);
+                var ddlSelectedDistrict = $("#districtList");
+                $("#districtList > option").remove();
+                for (i = 0; i < district.length; i++) {
+                    ddlSelectedDistrict.append($("<option />").val(district[i].Value).text(district[i].Text));
+                    //                    var ddl = document.getElementById("districtList");
+                    //                    ddl.disabled = false;
+                }
+            });
+        });
+
+    });
+
+    $(document).ready(function B() {
+        $("#districtList").change(function () {
+            var a = document.getElementById("provinceList").value;
+            $.get('/Account/getDetail/', { provinceID: a, id: $(this).val() }, function (response) {
+
+                var detail = $.evalJSON(response);
+                var ddlSelectedDetail = $("#detailList");
+                $("#detailList> option").remove();
+                for (i = 0; i < detail.length; i++) {
+                    ddlSelectedDetail.append($("<option />").val(detail[i].Value).text(detail[i].Text));
+                    //          var ddl = document.getElementById("detailList");
+                    //        ddl.disabled = false;
+                }
+            });
+        });
+    });
+
+</script>
+<script type="text/javascript">
+    $('#startDate').datepick({
+        pickerClass: 'startDate', showTrigger: '#calImg'
+    });
+    $('#endDate').datepick({
+        pickerClass: 'endDate', showTrigger: '#calImg'
+    });
+</script>

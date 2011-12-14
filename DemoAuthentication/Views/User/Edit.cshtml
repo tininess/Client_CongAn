@@ -1,0 +1,133 @@
+﻿@model DemoAuthentication.Models.AccountWrapper
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+ <div id="demo">
+    <ul>
+        <li><a href="#foo">User Information</a></li>
+        <li><a href="#bar">Role Information</a></li>
+     
+    </ul>
+    <div>
+        <div id="foo">
+         @Html.HiddenFor(model => model.user.UserName)
+         @Html.HiddenFor(model=>model.login.UserName)
+         
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.user.Companyname)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.user.Companyname)
+            @Html.ValidationMessageFor(model => model.user.Companyname)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.user.BusinessCode)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.user.BusinessCode)
+            @Html.ValidationMessageFor(model => model.user.BusinessCode)
+        </div>
+                  <div class="editor-label">
+            @Html.LabelFor(model => model.user.Phone)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.user.Phone)
+            @Html.ValidationMessageFor(model => model.user.Phone)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.user.Mobile)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.user.Mobile)
+            @Html.ValidationMessageFor(model => model.user.Mobile)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.user.CMND)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.user.CMND)
+            @Html.ValidationMessageFor(model => model.user.CMND)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.user.Address)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.user.Address)
+            @Html.ValidationMessageFor(model => model.user.Address)
+        </div>
+
+        
+
+   
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.user.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.user.Name)
+            @Html.ValidationMessageFor(model => model.user.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.user.Age)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.user.Age)
+            @Html.ValidationMessageFor(model => model.user.Age)
+        </div>
+      
+      </div>
+        <div id="bar">
+          <div class="editor-label">
+            @Html.LabelFor(model => model.login.roleID)
+        </div>
+        <div class="editor-field">
+            @Html.ValidationMessageFor(model => model.login.roleID)
+            @Html.DropDownListFor(model=>model.login.roleID, ViewData["Roles"] as SelectList)
+       
+        </div>
+         <div class="editor-label">
+            @Html.LabelFor(model => model.login.Email)
+        </div>
+        <div class="editor-field">
+            @Html.ValidationMessageFor(model => model.login.Email)
+            @Html.EditorFor(model => model.login.Email)
+       
+        </div>
+        </div>
+      
+    </div>
+    </div>
+    <p>
+            <input type="submit" value="Save" />
+        </p>
+            
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<script type="text/javascript">
+    YUI().use('tabview', function (Y) {
+        var tabview = new Y.TabView({ srcNode: '#demo' });
+        tabview.render();
+    });
+</script>
+
+}
+
+
+  

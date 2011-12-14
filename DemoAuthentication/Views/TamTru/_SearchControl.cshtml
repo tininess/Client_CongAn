@@ -1,0 +1,167 @@
+﻿@model DemoAuthentication.Models.TamTruModel
+           
+@using (Ajax.BeginForm("Search", "TamTru", null, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "divGrid", OnBegin = "beginPaging", OnSuccess = "successPaging" }, new { name = "formSearch" }))
+{ 
+    <table>
+    <tr>
+    <td>
+    <div class="editor-label">
+            @Html.LabelFor(model => model.SelectedProvinceValue)
+        </div>
+        <div class="editor-field">
+          @Html.DropDownListFor(model => model.SelectedProvinceValue, ViewBag.province as SelectList, new { style = "width:160px", id = "provinceList", onchange = "submit_formProvince()" })
+           @Html.ValidationMessageFor(model => model.SelectedProvinceValue)
+        </div>
+    </td>
+    <td>
+       <div class="editor-label">
+       @Html.CheckBox("chkDistrict", false, new { disabled = true, onclick = "enableDetail()" })
+            @Html.LabelFor(model => model.SelectedDistrictValue)
+        </div>
+        <div id="districtDiv">
+          
+            @Html.DropDownListFor(model => model.SelectedDistrictValue, ViewBag.district as SelectList, new { style = "width:160px", id = "districtList", onchange = "submit_formDistrict()", disabled = true })
+            @Html.ValidationMessageFor(model => model.SelectedDistrictValue)
+</div>
+   </td>
+    <td>
+    
+        <div class="editor-label">
+        @Html.CheckBox("chkDetail", false, new { disabled = true ,onclick="enableDistrict()"})
+            @Html.LabelFor(model => model.SelectedDetailProvincesValue)
+        </div>
+        <div class="editor-field">
+                 @Html.DropDownListFor(model => model.SelectedDetailProvincesValue, ViewBag.detail as SelectList, new { style = "width:160px", id = "detailList", onchange = "submit_formDetail()", disabled = true })
+            @Html.ValidationMessageFor(model => model.SelectedDetailProvincesValue)
+        </div>
+        </td>
+        </tr>
+    </table>
+   <table>
+    <tr>
+        <td>
+            <fieldset>
+                <legend>Search by: </legend>
+                @Html.RadioButton("keySearch", "code", true) Số Giấy Tờ
+                @Html.RadioButton("keySearch", "com", false) Họ Và Tên
+                @Html.TextBox("valSearch", "")
+                <input type="submit" value="Search" id="btnSubmit" />
+            </fieldset>
+        </td>
+        <td>
+            <fieldset>
+                <legend>Lọc</legend>
+            
+                @Html.RadioButton("keyFilter", "1", false, new { onclick = "submit_form()" }) Đơn Vị Đăng Ký
+                @Html.RadioButton("keyFilter", "2", false, new { onclick = "submit_form()" }) Cá Nhân Đăng Ký
+                @Html.RadioButton("keyFilter", "3", true, new { onclick = "submit_form()" })  Công An Đăng kí
+                @Html.RadioButton("keyFilter", "0", false, new { onclick = "submit_form()" }) Tất Cả   
+                @Html.RadioButton("keyFilter", "4", false, new { onclick = "submit_form()" }) Chờ duyệt 
+           </fieldset>
+        </td>
+    </tr>
+   </table>
+    <script type="text/javascript">
+        function submit_form() {
+            var btn = document.getElementById("btnSubmit");
+            btn.click();
+        }
+        function submit_formProvince() {
+            var chkDistrict = document.getElementById("chkDistrict");
+            var ddlProvince = document.getElementById("provinceList");
+            var ddlDistrict = document.getElementById("districtList");
+            var ddlDetail = document.getElementById("detailList");
+            var chkDetail = document.getElementById("chkDetail");
+            var btn = document.getElementById("btnSubmit");
+            if (ddlProvince.value != 0) {
+                chkDistrict.disabled = false;
+                ddlDistrict.disabled = false;
+
+                btn.click();
+            }
+            else {
+                chkDistrict.disabled = true;
+                ddlDistrict.disabled = true;
+                chkDetail.disabled = true;
+                ddlDetail.disabled = true;
+                chkDetail.checked = false;
+                chkDistrict.checked = false;
+                btn.click();
+            }
+        }
+        function submit_formDistrict() {
+            var btn = document.getElementById("btnSubmit");
+            var chkDistrict = document.getElementById("chkDistrict");
+            var ddlDetail = document.getElementById("detailList");
+            var chkDetail = document.getElementById("chkDetail");
+            var ddlDistrict = document.getElementById("districtList");
+            if (chkDistrict.checked == true) {
+                btn.click();
+            }
+            if (ddlDistrict.disabled != true) {
+                chkDetail.disabled = false;
+                ddlDetail.disabled = false;
+            }
+            else {
+                chkDetail.disabled = true;
+                ddlDetail.disabled = true;
+
+            }
+        }
+        function submit_formDetail() {
+            var btn = document.getElementById("btnSubmit");
+            var chkDetail = document.getElementById("chkDetail");
+            if (chkDetail.checked == true) {
+                btn.click();
+            }
+        }
+
+        function enableDistrict() {
+            var chkDistrict = document.getElementById("chkDistrict");
+            var ddlDetail = document.getElementById("detailList");
+            chkDistrict.checked = true;
+        }
+        function enableDetail() {
+            var chkDistrict = document.getElementById("chkDetail");
+            chkDistrict.checked = false;
+        }
+        
+</script> 
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function () {
+            $("#provinceList").change(function () {
+                $.get('/Account/getDistrict/' + $(this).val(), function (response) {
+
+                    var district = $.evalJSON(response);
+                    var ddlSelectedDistrict = $("#districtList");
+                    $("#districtList > option").remove();
+                    for (i = 0; i < district.length; i++) {
+                        ddlSelectedDistrict.append($("<option />").val(district[i].Value).text(district[i].Text));
+                    }
+                });
+            });
+
+        });
+
+        $(document).ready(function () {
+            $("#districtList").change(function () {
+                var a = document.getElementById("provinceList").value;
+                $.get('/Account/getDetail/', { provinceID: a, id: $(this).val() }, function (response) {
+
+                    var detail = $.evalJSON(response);
+                    var ddlSelectedDetail = $("#detailList");
+                    $("#detailList> option").remove();
+                    for (i = 0; i < detail.length; i++) {
+                        ddlSelectedDetail.append($("<option />").val(detail[i].Value).text(detail[i].Text));
+                    }
+                });
+            });
+        });
+
+</script>
+}
+
+
+
+ 
+   

@@ -1,0 +1,9 @@
+﻿@model DemoAuthentication.Models.FaultModel
+@{
+    ViewBag.Title = "fault";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Xin lỗi. Việc đăng ký đã không thành công !!!</h1>
+<h2>@Html.DisplayFor(m => m.Issue)</h2>
+<h2>@Html.DisplayFor(m=>m.Detail)</h2>

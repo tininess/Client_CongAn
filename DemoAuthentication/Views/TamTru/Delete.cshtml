@@ -1,0 +1,100 @@
+﻿@model DemoAuthentication.Models.TamTruModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Delete</legend>
+
+    <b> <div class="display-label">TTTV__Type</div></b>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Type)
+    </div>
+
+   <b> <div class="display-label">TTTV__Status</div></b>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TrangThai)
+    </div>
+
+    <b><div class="display-label">TTTV__GiayTo</div></b>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.GiayTo)
+    </div>
+
+    <b><div class="display-label">TTTV__LiDo</div></b>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LiDo)
+    </div>
+
+    <b><div class="display-label">TTTV__QuocTich</div></b>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.QuocTich)
+    </div>
+
+    <b><div class="display-label">TT_FullName</div></b>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TT_FullName)
+    </div>
+
+    <b><div class="display-label">TT_DiaChiThuongTru</div></b>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TT_DiaChiThuongTru)
+    </div>
+
+    <b><div class="display-label">TT_NgayDen</div></b>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TT_NgayDen)
+    </div>
+
+    <b><div class="display-label">TT_NgayDi</div></b>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TT_NgayDi)
+    </div>
+
+    <b><div class="display-label">TT_DiaChiTamTru</div></b>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TT_DiaChiTamTru)
+    </div>
+
+    <b><div class="display-label">TT_Room</div></b>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TT_Room)
+    </div>
+
+    <b><div class="display-label">TT_GiayTo</div></b>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TT_GiayTo)
+    </div>
+
+
+
+    <b><div class="display-label">TT_LiDoKhac</div></b>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TT_LiDoKhac)
+    </div>
+
+    <b><div class="display-label">Province</div></b>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Tinh)
+    </div>
+
+    <b><div class="display-label">District</div></b>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Quan)
+    </div>
+
+    <b><div class="display-label">DetailProvince</div></b>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Phuong)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

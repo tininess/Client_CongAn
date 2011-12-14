@@ -1,0 +1,115 @@
+﻿
+@model MvcPaging.PagedList<DemoAuthentication.Models.TamTruModel>
+@{
+    ViewBag.Title = "ListControl";
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="divgrid" id="list">
+    <tr>
+        <th>
+           Type
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            GiayTo
+        </th>
+        <th>
+            LiDo
+        </th>
+        <th>
+           QuocTich
+        </th>
+        <th>
+            FullName
+        </th>
+        <th>
+           DiaChiThuongTru
+        </th>
+        <th>
+            NgayDen
+        </th>
+        <th>
+           NgayDi
+        </th>
+        <th>
+           DiaChiTamTru
+        </th>
+        
+        <th>
+            GiayTo
+        </th>
+        <th>
+            Users
+        </th>
+       
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TrangThai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GiayTo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LiDo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuocTich)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TT_FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TT_DiaChiThuongTru)/@Html.DisplayFor(modelItem => item.Phuong)/@Html.DisplayFor(modelItem => item.Quan)/@Html.DisplayFor(modelItem => item.Tinh)
+        </td>
+        <td>
+            @String.Format("{0:dd/MM/yyyy}", item.TT_NgayDen)
+        </td>
+        <td>
+              @String.Format("{0:dd/MM/yyyy}", item.TT_NgayDi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TT_DiaChiTamTru)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.TT_GiayTo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.username)
+        </td>
+       
+      
+         @if (item.SelectedStatusValue!=3){
+          
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.MaTamTru }) |
+            @Html.ActionLink("Details", "Details", new { id = item.MaTamTru }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.MaTamTru })
+        </td>
+        }else{
+          <td>  
+            @Html.ActionLink("Edit", "Edit", new { id = item.MaTamTru }) |
+           @Html.ActionLink("Duyệt", "Duyet", new { id = item.MaTamTru, user = item.username }) |
+           @Html.ActionLink("Delete", "Delete", new { id = item.MaTamTru }) |
+           </td>
+         }
+    </tr>
+}
+
+</table>
+<div class="pager">
+  @Ajax.Pager(ViewData.Model.PageSize, ViewData.Model.PageNumber, ViewData.Model.TotalItemCount, new { controller = "TamTru", action = "Search", keySearch = ViewData["keySearch"], valSearch = ViewData["valSearch"], keyFilter = ViewData["keyFilter"], chkDistrict = ViewData["chkDistrict"], chkDetail = ViewData["chkDetail"], SelectedProvinceValue = ViewData["tinh"],SelectedDistrictValue=ViewData["quan"], SelectedDetailProvincesValue=ViewData["phuong"]}, new AjaxOptions { UpdateTargetId = "divGrid",OnBegin = "beginPaging", OnSuccess = "successPaging"})
+ </div>

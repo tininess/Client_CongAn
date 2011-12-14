@@ -1,0 +1,273 @@
+﻿@model DemoAuthentication.Models.RegisterModel
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Đăng Ký Tài Khoản</legend>
+        <table width="100%">
+        <tr>
+        <td>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UserName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UserName)
+            @Html.ValidationMessageFor(model => model.UserName)
+        </div>
+        </td>
+        <td>
+         <div class="editor-label">
+            @Html.LabelFor(model => model.Email)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+        </td>
+        </tr>
+        <tr>
+        <td>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Password)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+        </td>
+        <td>
+         <div class="editor-label">
+            @Html.LabelFor(model => model.ConfirmPassword)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ConfirmPassword)
+            @Html.ValidationMessageFor(model => model.ConfirmPassword)
+        </div>
+        </td>
+        </tr>
+        <tr>
+        <td>
+           
+        <div class="editor-label">
+            @Html.LabelFor(model => model.question)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.question)
+            @Html.ValidationMessageFor(model => model.question)
+        </div>
+        </td>
+        <td>
+         <div class="editor-label">
+            @Html.LabelFor(model => model.answear)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.answear)
+            @Html.ValidationMessageFor(model => model.answear)
+        </div>
+        </td>
+        </tr>
+        </table>
+        
+        <h2>Thông Tin Cá Nhân/ Doanh Nghiệp</h2>
+
+    <table width="100%">
+    <tr>
+    <td>
+     <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+    </td>
+    <td>
+    
+         <div class="editor-label">
+            @Html.LabelFor(model => model.Age)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Age)
+            @Html.ValidationMessageFor(model => model.Age)
+        </div>
+    </td>
+    <td>
+     <div class="editor-label">
+            @Html.LabelFor(model => model.subAddress)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.subAddress)
+            @Html.ValidationMessageFor(model => model.subAddress)
+        </div>
+    </td>
+    </tr>
+ 
+    <tr>
+    <td>
+       <div class="editor-label">
+            @Html.LabelFor(model => model.CMND)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CMND)
+            @Html.ValidationMessageFor(model => model.CMND)
+        </div>
+    </td>
+    <td>
+       <div class="editor-label">
+            @Html.LabelFor(model => model.Mobile)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Mobile)
+            @Html.ValidationMessageFor(model => model.Mobile)
+        </div>
+    </td>
+    </tr>
+  
+    <tr>
+    <td>
+     <div class="editor-label">
+            @Html.LabelFor(model => model.SelectedProvinceValue)
+        </div>
+        <div class="editor-field">
+          @Html.DropDownListFor(model => model.SelectedProvinceValue, ViewBag.province as SelectList,"Chọn Tỉnh - Thành Phố", new { style = "width:160px", id="provinceList" })
+           @Html.ValidationMessageFor(model => model.SelectedProvinceValue)
+        </div>
+    </td>
+    <td>
+       <div class="editor-label">
+            @Html.LabelFor(model => model.SelectedDistrictValue)
+        </div>
+        <div id="districtDiv">
+          
+            @Html.DropDownListFor(model => model.SelectedDistrictValue, ViewBag.district as SelectList, "Chọn Quận - Huyện", new { style = "width:160px", id = "districtList" })
+            @Html.ValidationMessageFor(model => model.SelectedDistrictValue)
+
+           
+        </div>
+    </td>
+    <td>
+    
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SelectedDetailProvincesValue)
+        </div>
+        <div class="editor-field">
+                 @Html.DropDownListFor(model => model.SelectedDetailProvincesValue, ViewBag.detail as SelectList, "Chọn Phường - Xã", new { style = "width:160px", id = "detailList" })
+            @Html.ValidationMessageFor(model => model.SelectedDetailProvincesValue)
+        </div>
+    </td>
+    </tr>
+    <tr>
+    <td>
+     <div class="editor-label">
+            @Html.LabelFor(model => model.Companyname)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Companyname)
+            @Html.ValidationMessageFor(model => model.Companyname)
+        </div>
+
+    </td>
+   <td>
+     <div class="editor-label">
+            @Html.LabelFor(model => model.BusinessCode)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.BusinessCode)
+            @Html.ValidationMessageFor(model => model.BusinessCode)
+        </div>
+   </td>
+    </tr>
+    <tr>
+    <td>
+    <div class="editor-label">
+            @Html.LabelFor(model => model.Phone)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Phone)
+            @Html.ValidationMessageFor(model => model.Phone)
+        </div>
+    </td>
+    <td>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Address)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Address)
+            @Html.ValidationMessageFor(model => model.Address)
+        </div>
+    </td>
+    
+    </tr>
+    </table>
+     
+
+       
+       
+
+     
+        
+       
+
+         
+
+      
+
+      
+
+       
+     
+        
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+        $("#provinceList").change(function () {
+            $.get('/Account/getDistrict/' + $(this).val(), function (response) {
+
+                var district = $.evalJSON(response);
+                var ddlSelectedDistrict = $("#districtList");
+                $("#districtList > option").remove();
+                for (i = 0; i < district.length; i++) {
+                    ddlSelectedDistrict.append($("<option />").val(district[i].Value).text(district[i].Text));
+                    //                    var ddl = document.getElementById("districtList");
+                    //                    ddl.disabled = false;
+                }
+            });
+        });
+
+    });
+
+    $(document).ready(function B() {
+        $("#districtList").change(function () {
+            var a = document.getElementById("provinceList").value;
+            $.get('/Account/getDetail/', { provinceID: a, id: $(this).val() }, function (response) {
+
+                var detail = $.evalJSON(response);
+                var ddlSelectedDetail = $("#detailList");
+                $("#detailList> option").remove();
+                for (i = 0; i < detail.length; i++) {
+                    ddlSelectedDetail.append($("<option />").val(detail[i].Value).text(detail[i].Text));
+                    //          var ddl = document.getElementById("detailList");
+                    //        ddl.disabled = false;
+                }
+            });
+        });
+    });
+
+</script>
